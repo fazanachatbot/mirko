@@ -10,8 +10,8 @@ export default () => {
   }, []);
   return (
     <>
-      <Main />
       <NavBar />
+      <Main />
     </>
   );
 };

@@ -16,22 +16,23 @@ export default () => {
           }
         `}
       </style>
-      <Navbar fixed='bottom'>
+      <Navbar sticky='top'>
         <Nav.Item>
           M.Ljubic, 2019 - 2020
         </Nav.Item>
         <Nav className='ml-auto'>
-          {
-            ['About', 'Feedback', 'EN', 'DE'].map(
-              (text, index) => (
-              <Nav.Item key={index}>
-                <Button variant='outline-info'>
-                  {text}
-                </Button>
-              </Nav.Item>
-              )
-            )
-          }
+          <Nav.Item>
+            <Button variant='outline-info'>About</Button>
+          </Nav.Item>
+          <Nav.Item>
+            <Button variant='outline-info'>Feedback</Button>
+          </Nav.Item>
+          <Nav.Item>
+            <Button variant='outline-info'>EN</Button>
+          </Nav.Item>
+          <Nav.Item>
+            <Button variant='outline-info'>DE</Button>
+          </Nav.Item>
         </Nav>
       </Navbar>
     </>
