@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+main {
+  height: 95vh;
+  padding-top: 5vh;
+  padding-left: 3vh;
+}
+body {
+  background: lightblue;
+  background-image: url("../Images/kod_bunkera.jpg");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  position: relative;
+}
+button {
+  background: transparent;
+  color: black;
+  border-radius: 2px;
+  border: 1px solid black;
+  margin-right: 1vw;
+}
+#logo {
+  border: 2px solid black;
+  height: 15vh;
+  margin-bottom: 7vh;
+}
+#chat {
+  height: 65vh;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+#messageContainer {
+  border: 1px solid silver;
+  height: 95%;
+  overflow: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  margin-bottom: 5px;
+}
+.message {
+  padding: 5px;
+  width: 55%;
+  text-align: justify;
+  border-radius: 5px;
+  margin: 5px;
+}
+.messageUser {
+  background-color: black;
+  color: white;
+  margin-left: auto;
+}
+.messageBot {
+  background-color: silver;
+  color: black;
+  margin-left: 5px;
+}
+#messageForm {
+  height: 5%;
+  padding: 3px;
+  display: flex;
+  flex-direction: row;
+}
+#messageForm > input {
+  width: 100%;
+}
+#messageForm > button {
+  margin-right: 0;
+  margin-left: 5px;
+}
+footer {
+  background-color: hsla(195, 53%, 79%, 0.75);
+  height: 5vh;
+  display: grid;
+  grid-template-areas: 
+    'author author author author author author author buttons'
+  ;
+  align-items: center;
+}
+#author {
+  grid-area: author;
+  justify-self: start;
+  margin-left: 1vw;
+}
+#buttons {
+  grid-area: buttons;
+  justify-self: end;
+}
+/* @import fonts*/
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+@media (min-width: 1281px) {
+  body,
+  input::-webkit-input-placeholder {
+    font-size: 1rem;
+  }
+  button {
+    font-size: 1rem;
+  }
+  #logo {
+    width: 750px;
+  }
+  #chat {
+    width: 600px;
+    height: 65vh;
+  }
+  #messageForm > input{
+    padding: 13px 5px;
+    overflow: hidden;
+  }
+  #messageForm > button {
+    padding: 14px 5px;
+    text-align: center;
+    line-height: 0.1em;
+  }
+}
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+  #logo {
+    width: 630px;
+  }
+  #chat {
+    width: 500px;
+  }
+}
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  #logo {
+    width: 630px;
+  }
+  #chat {
+    width: 500px;
+  }
+}
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  #logo {
+    width: 630px;
+  }
+  #chat {
+    width: 500px;
+  }
+}
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+  main {
+    padding: 0;
+  }
+  #logo {
+    width: 100%;
+  }
+  #chat {
+    width: 450px;
+    margin: auto;
+  }
+}
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+  main {
+    padding: 0;
+  }
+  #chat {
+    width: 90vw ;
+    margin: auto;
+  }
+}
