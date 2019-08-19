@@ -1,5 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './Components/App';
+import AppHooks from './Components/AppHooks';
 
-render(<App />, document.getElementById('root'));
+render(<AppHooks />, document.getElementById('root'));
