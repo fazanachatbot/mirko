@@ -1,0 +1,414 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico|Ubuntu&display=swap');
+
+//breakpoints
+$break-small: 320px;
+$break-large: 1025px;
+$break-extra-large: 1366px;
+
+//other
+$border-radius: 0.2rem;
+$primary-color: rgb(34, 94, 99);
+$secondary-color: rgb(196, 251, 255);
+$user-message-color: rgba(57, 147, 221, 0.548);
+$bot-message-color: rgba(92, 204, 204, 0.788);
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: $break-small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large) { @content; }
+  }
+  @else if $media == large-screens {
+    @media only screen and (min-width: $break-large + 1) and (max-width: $break-extra-large - 1) { @content; }
+  }
+  @else if $media == extra-large-screens {
+    @media only screen and (min-width: $break-extra-large) { @content; }
+  }
+}
+
+@mixin cursive-font {
+    font-family: 'Pacifico', cursive;
+    color: $primary-color;
+    font-size: 1.3rem;
+    @include respond-to(handhelds) {
+        font-size: 1rem;
+    }
+    @include respond-to(medium-screens) {
+        font-size: 1rem;
+    }
+}
+
+:root {
+    font-size: 24px;
+    font-family: 'Ubuntu', sans-serif;
+    color: $primary-color;
+}
+
+html,
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(rgba(122, 208, 248, 0.377),  rgba(94, 203, 240, 0.473) 50%, rgba(66, 156, 230, 0.603) 95%);
+    overflow-x: hidden;
+    
+    #root {
+        display: grid;
+        grid-template-rows: 7vh 93vh;
+        grid-template-areas:
+        'header'
+        'main';
+
+        
+        #header {
+            grid-area: header;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+            background: rgb(255, 255, 255);
+            border-bottom-left-radius: 1.5rem;
+            border-bottom: 0.15rem solid $secondary-color;
+            @include respond-to(handhelds) {
+                border-bottom-left-radius: 1rem;
+                padding: 0 1rem;
+            }
+
+            #heading {
+                @include cursive-font;
+                font-weight: bold;
+            }
+        }
+        
+        #main {
+            grid-area: main;
+            display: grid;
+            grid-template-columns: 45% 55%;
+            grid-template-areas: 'chat-area info-area';
+            @include respond-to(handhelds) {
+                grid-template-columns: 100%;
+                grid-template-rows: 93vh max-content;
+                grid-template-areas:
+                'chat-area'
+                'info-area';
+            }
+            @include respond-to((medium-screens)) {
+                grid-template-columns: 100vw;
+                grid-template-rows: 93vh max-content;
+                grid-template-areas:
+                'chat-area'
+                'info-area';
+            }
+            
+            #chat-area {
+                grid-area: chat-area;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // background: rgb(240, 156, 156);
+                @include respond-to(handhelds) {
+                    align-items: flex-start;
+                }
+                @include respond-to(medium-screens) {
+                    align-items: flex-start;
+                }
+                
+                #chat-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 90%;
+                    height: 80%;
+                    max-height: 700px;
+                    padding: 0.3rem;
+                    background: repeating-linear-gradient(53deg, #b38961, #9c7958 13px, #fff 13px, #ddd 16px);
+                    border-radius: $border-radius;
+                    border: 2px solid $primary-color;
+                    -webkit-box-shadow: 0px 4px 10px -4px $primary-color;
+                    -moz-box-shadow: 0px 4px 10px -4px $primary-color;
+                    box-shadow: 0px 4px 10px -4px $primary-color;
+                    @include respond-to(handhelds) {
+                        width: 90vw;
+                        height: 90%;
+                        margin-top: 20px;
+                    }
+                    @include respond-to(medium-screens) {
+                        width: 85vw;
+                        max-width: 400px;
+                        height: 85%;
+                        margin-top: 20px;
+                    }
+                    @include respond-to(large-screens) { 
+                        width: 70vw;
+                        max-width: 430px;
+                    }
+                    @include respond-to(extra-large-screens) { 
+                        width: 60vw;
+                        max-width: 700px;
+                    }
+                    
+                    #chat {
+                        width: 100%;
+                        height: 100%;
+                        background: #fff;
+                        border: 2px solid $primary-color;
+                        border-radius: $border-radius;
+                        overflow-x: hidden;
+                        scroll-behavior: smooth;
+                        color: black;
+                        
+                        .message {
+                            position: relative;
+                            background: $user-message-color;
+                            border-radius: .4em;
+                            overflow-wrap: break-word;
+                            white-space: pre-wrap;
+                            width: fit-content;
+                            max-width: 55%;
+                            // text-align: justify;
+                            word-wrap: break-word;
+                            margin: 0.5rem 0.4rem;
+                            padding: 0.4rem;
+                            font-size: 0.82rem;
+                            // -webkit-box-shadow: 0px 4px 10px -4px $primary-color;
+                            // -moz-box-shadow: 0px 4px 10px -4px $primary-color;
+                            // box-shadow: 0px 4px 10px -4px $primary-color;
+                        }
+                        .message-user {
+                            margin-left: auto;
+                            
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                right: 0;
+                                top: 50%;
+                                width: 0;
+                                height: 0;
+                                border: 0.3rem solid transparent;
+                                border-left-color: $user-message-color;
+                                border-right: 0;
+                                border-top: 0;
+                                margin-top: -9.5px;
+                                margin-right: -0.3rem;
+                            }
+                        }
+                        
+                        .message-bot {
+                            background: $bot-message-color;
+                            
+                            &::after {
+                                content: '';
+                                position: absolute;
+                                left: 0;
+                                top: 50%;
+                                width: 0;
+                                height: 0;
+                                border: 0.3rem solid transparent;
+                                border-right-color: $bot-message-color;
+                                border-left: 0;
+                                border-top: 0;
+                                margin-top: -9.5px;
+                                margin-left: -0.3rem;
+                            }
+                        }
+                    }
+                    
+                    #chat-form {
+                        display: flex;
+                        flex-direction: row;
+                        width: 100%;
+                        margin-top: 0.3rem;
+                        
+                        input[type=text] {
+                            width: 100%;
+                            border-radius: $border-radius;
+                            margin-right: 0.3rem;
+                            border: 2px solid $primary-color;
+                            padding-left: 0.5rem;
+                        }
+
+                        button[type=submit] {
+                            border-width: 2px;
+                        }
+                    }
+                }
+            }
+
+            #info-area {
+                grid-area: info-area;
+                display: flex;
+                justify-content: center;
+                align-items: center;                
+                @include respond-to(handhelds) {
+                    align-items: flex-start;
+                    margin-bottom: 3vh;
+                }
+                @include respond-to(medium-screens) {
+                    align-items: flex-start;
+                    margin-bottom: 3vh;
+                }
+                
+                #info-wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 90%;
+                    max-width: 1000px;
+                    padding: 0.3rem;
+                    background: repeating-linear-gradient(53deg, #b38961, #9c7958 13px, #fff 13px, #ddd 16px);
+                    border-radius: $border-radius;
+                    border: 2px solid $primary-color;
+                    -webkit-box-shadow: 0px 4px 10px -4px $primary-color;
+                    -moz-box-shadow: 0px 4px 10px -4px $primary-color;
+                    box-shadow: 0px 4px 10px -4px $primary-color;
+                    
+                    #info {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        width: 100%;
+                        background: #fff;
+                        border-radius: $border-radius;
+                        border: 2px solid $primary-color;
+                        
+                        h1 {
+                            margin: 0;
+                            @include cursive-font;
+                            font-size: 1.8rem;
+                            word-wrap: break-word;
+                        }
+
+                        p {
+                            color: black;
+                            text-align: justify;
+                            line-height: 1.5rem;
+                            letter-spacing: 0.1rem;
+                            padding: 0 0.8rem;
+                            margin-bottom: 1rem;
+                            @include respond-to(handhelds) {
+                                font-size: 0.8rem;
+                                line-height: initial;
+                                letter-spacing: initial;
+                            }
+                            @include respond-to(medium-screens) {
+                                font-size: 0.8rem;
+                                line-height: initial;
+                                letter-spacing: initial;
+                            }
+                        }
+                        
+                        #istra {
+                            width: 150px;
+                            height: 100px;
+                            margin-top: auto;
+                            margin-bottom: 0.5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .modal-overlay {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba($color: #000000, $alpha: 0.75);
+            
+        .modal-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 70%;
+            max-width: 500px;
+            height: 75%;
+            max-height: 600px;
+            padding: 0.3rem;
+            background: repeating-linear-gradient(53deg, #b38961, #9c7958 13px, #fff 13px, #ddd 16px);
+            border-radius: $border-radius;
+            border: 2px solid $primary-color;
+
+            .modal {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                background: white;
+                border-radius: $border-radius;
+                border: 2px solid $primary-color;
+
+                h1 {
+                    @include cursive-font;
+                    padding: 0 0.8rem;
+                }
+
+                p {
+                    color: black;
+                    text-align: justify;
+                    line-height: 1.5rem;
+                    letter-spacing: 0.05rem;
+                    padding: 0 0.8rem;
+                    margin-bottom: 1rem;
+                    @include respond-to(handhelds) {
+                        font-size: 0.8rem;
+                        line-height: initial;
+                        letter-spacing: initial;
+                    }
+                    @include respond-to(medium-screens) {
+                        font-size: 0.8rem;
+                        line-height: initial;
+                        letter-spacing: initial;
+                    }
+                }
+
+                img {
+                    width: 32px;
+                    margin-bottom: 5px;
+                    @include respond-to(large-screens) {
+                        width: 36px;
+                    }
+                    @include respond-to(extra-large-screens) {
+                        width: 40px;
+                    }
+                }
+                
+                .hide {
+                    margin-top: auto;
+                    margin-bottom: 0.5rem;
+                }
+            }
+            }
+        }
+    }
+    
+button {
+    padding: 0.5rem;
+    border-radius: $border-radius;
+    border: 1px solid $primary-color;
+    background: white;
+    transition: all ease-in-out 100ms;
+    @include respond-to(handhelds){
+        padding: 0.2rem;
+    }
+    @include respond-to(medium-screens){
+        padding: 0.25rem;
+    }
+    @include respond-to(large-screens){
+        padding: 0.35rem;
+    }
+
+    &:hover {
+        background: $primary-color;
+        color: white;
+    }
+}
