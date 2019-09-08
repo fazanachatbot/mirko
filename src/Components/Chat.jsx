@@ -28,7 +28,7 @@ const Chat = () => {
 
                 if('greetings' in res.entities) {
                     msg = 'Why hello there!';
-                } else if ('') {
+                } else if ('intent' in res.entities) {
                     msg = 'Some other message'
                 } else {
                     msg = `I'm sorry I didn't quite get you, could you paraphrase that for me?`
