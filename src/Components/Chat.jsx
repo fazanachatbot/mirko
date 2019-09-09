@@ -25,11 +25,39 @@ const Chat = () => {
         client.message(input, {})
             .then(res => {
                 let msg;
-
+                /* napravi neku petlju i jedan ogroman objekt koji ima strukturu stabla i klasificiran je po intentovima,
+                   npr. {
+                       where_is_x: {
+                           food: {
+                               grill: '',
+                               seafood: '',
+                               pizza: '',
+                               ...
+                           }
+                           landmark: {
+                               tourist office: '',
+                               ...
+                           }
+                       },
+                       is_there_x: {
+                           food: {
+                               grill: '',
+                               seafood: '',
+                               ...
+                           },
+                           ...
+                       },
+                       ...
+                    }, koji sadrzi sve odgovore tako da mogu look upat intent i iz vrijednosti koju ima matchati unutar objekta
+                */ 
                 if('greetings' in res.entities) {
                     msg = 'Why hello there!';
                 } else if ('intent' in res.entities) {
-                    msg = 'Some other message'
+                    if ('food' in res.entities) {
+                        if (res.entities.food[0].value === 'grill') msg = 'You can find delicious steaks at restaurant Feral'
+                    } else {
+                        msg = 'Some other message'
+                    }
                 } else {
                     msg = `I'm sorry I didn't quite get you, could you paraphrase that for me?`
                 }
@@ -39,6 +67,7 @@ const Chat = () => {
             .catch(() => setMessages(previous => [...previous, {text: 'I\'m sorry, something went terribly wrong.. Please repeat yourself', user: false}]));
 
         setInput('');
+        document.querySelector('#chat').scroll(0, document.querySelector('#chat').scrollHeight);
     }
 
     return (
