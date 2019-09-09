@@ -67,7 +67,7 @@ const Chat = () => {
             .catch(() => setMessages(previous => [...previous, {text: 'I\'m sorry, something went terribly wrong.. Please repeat yourself', user: false}]));
 
         setInput('');
-        document.querySelector('#chat').scroll(0, document.querySelector('#chat').scrollHeight);
+        document.querySelector('#chat').scrollTo(0, document.querySelector('#chat').scrollHeight)
     }
 
     return (
