@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
-import {Wit, log} from 'node-wit'
+import {Wit} from 'node-wit'
 
 const client = new Wit({
     accessToken: 'BCBOT3Y7PRJ2YGTE6HKJVGGXHNCAEHDI',
-    logger: new log.Logger(log.DEBUG)
 })
+
+const selectRandomMessage = (array) => {
+    return array[Math.floor(Math.random() * array.length)];
+}
 
 const Chat = () => {
     const [input, setInput] = useState('');
@@ -25,49 +28,21 @@ const Chat = () => {
         client.message(input, {})
             .then(res => {
                 let msg;
-                /* napravi neku petlju i jedan ogroman objekt koji ima strukturu stabla i klasificiran je po intentovima,
-                   npr. {
-                       where_is_x: {
-                           food: {
-                               grill: '',
-                               seafood: '',
-                               pizza: '',
-                               ...
-                           }
-                           landmark: {
-                               tourist office: '',
-                               ...
-                           }
-                       },
-                       is_there_x: {
-                           food: {
-                               grill: '',
-                               seafood: '',
-                               ...
-                           },
-                           ...
-                       },
-                       ...
-                    }, koji sadrzi sve odgovore tako da mogu look upat intent i iz vrijednosti koju ima matchati unutar objekta
-                */ 
+
                 if('greetings' in res.entities) {
-                    msg = 'Why hello there!';
+                    const greetings = ['Why hello there!', 'Hiya!', 'Hello to you too']
+                    msg = selectRandomMessage(greetings);
                 } else if ('intent' in res.entities) {
-                    if ('food' in res.entities) {
-                        if (res.entities.food[0].value === 'grill') msg = 'You can find delicious steaks at restaurant Feral'
-                    } else {
-                        msg = 'Some other message'
-                    }
+                    msg = 'Some other message'
                 } else {
                     msg = `I'm sorry I didn't quite get you, could you paraphrase that for me?`
                 }
 
                 setMessages(previous => [...previous, {text: msg, user: false}]);
+                document.querySelector('#chat').scroll(0, document.querySelector('#chat').scrollHeight);
             })
             .catch(() => setMessages(previous => [...previous, {text: 'I\'m sorry, something went terribly wrong.. Please repeat yourself', user: false}]));
-
         setInput('');
-        document.querySelector('#chat').scrollTo(0, document.querySelector('#chat').scrollHeight)
     }
 
     return (

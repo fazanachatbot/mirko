@@ -89,14 +89,14 @@ body {
             grid-template-areas: 'chat-area info-area';
             @include respond-to(handhelds) {
                 grid-template-columns: 100%;
-                grid-template-rows: 93vh max-content;
+                grid-template-rows: 93vh 70vh;
                 grid-template-areas:
                 'chat-area'
                 'info-area';
             }
             @include respond-to((medium-screens)) {
                 grid-template-columns: 100vw;
-                grid-template-rows: 93vh max-content;
+                grid-template-rows: 93vh 70vh;
                 grid-template-areas:
                 'chat-area'
                 'info-area';
@@ -107,6 +107,7 @@ body {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                // background: rgb(240, 156, 156);
                 @include respond-to(handhelds) {
                     align-items: flex-start;
                 }
@@ -121,7 +122,6 @@ body {
                     align-items: center;
                     width: 90%;
                     height: 80%;
-                    min-height: 450px;
                     max-height: 700px;
                     padding: 0.3rem;
                     background: repeating-linear-gradient(53deg, #b38961, #9c7958 13px, #fff 13px, #ddd 16px);
