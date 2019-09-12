@@ -69,7 +69,7 @@ const Chat = () => {
                                 case 'local cuisine':
                                 case 'seafood':
                                 case 'pasta':
-                                    msg = `You can eat some tasty${keywordValue} in either 'Konoba Feral' or 'Stara Konoba', both of which are in the center of Fažana. Follow the coastline and you won't miss them :)`;
+                                    msg = `You can eat some tasty ${keywordValue} in either 'Konoba Feral' or 'Stara Konoba', both of which are in the center of Fažana. Follow the coastline and you won't miss them :)`;
                                     break;
                                 case 'fast food':
                                     msg = `You can usually find fish and chips at any restaurant but we also have a local fast food called 'Kroko food' which is worth checking out`;
