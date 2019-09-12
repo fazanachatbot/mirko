@@ -43,7 +43,6 @@ const Chat = () => {
                     const {value: keywordValue} = res.entities[keywordEntity][0];
                     const {value: intentValue} = res.entities.intent[0];
                     switch(intentValue) {
-                        // RESPONSE FORMAT -> VRATIS OVAJ PRETHODNI OBJEKT ALI IMA SADA DATE N SHIT
 
                         case 'get_happening':
                             msg = `Happening not implemented yet`;
