@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Wit } from 'node-wit'
+import { Wit, log } from 'node-wit'
 
 const client = new Wit({
     accessToken: 'BCBOT3Y7PRJ2YGTE6HKJVGGXHNCAEHDI',
+    logger: new log.Logger(log.DEBUG),
 })
 
 const selectRandomMessage = (array) => {
@@ -38,12 +39,11 @@ const Chat = () => {
                     for (let entity of entries) {
                         if (entity[0] !== 'intent') {
                             keywordEntity = entity[0];
-                        }
-                    }
+                        };
+                    };
                     const {value: keywordValue} = res.entities[keywordEntity][0];
                     const {value: intentValue} = res.entities.intent[0];
                     switch(intentValue) {
-
                         case 'get_happening':
                             msg = `Happening not implemented yet`;
                             break;
@@ -64,91 +64,85 @@ const Chat = () => {
                             switch(keywordValue) {
                                 // food
                                 case 'desert':
-                                    msg = ``;
+                                    msg = `You can get desert at just about any restaurant or café`;
                                     break;
                                 case 'local cuisine':
-                                    msg = ``;
+                                case 'seafood':
+                                case 'pasta':
+                                    msg = `You can eat some tasty${keywordValue} in either 'Konoba Feral' or 'Stara Konoba', both of which are in the center of Fažana. Follow the coastline and you won't miss them :)`;
                                     break;
                                 case 'fast food':
-                                    msg = ``;
+                                    msg = `You can usually find fish and chips at any restaurant but we also have a local fast food called 'Kroko food' which is worth checking out`;
                                     break;
                                 case 'pizza':
-                                    msg = ``;
+                                    msg = `There are many pizzerias and pizza-cuts, but my personal favorite is Sorisso, which you can visit by moving towards BiVillage. It's hard to miss.`;
                                     break;
                                 case 'grill':
-                                    msg = ``;
-                                    break;
-                                case 'pasta':
-                                    msg = ``;
-                                    break;
-                                case 'seafood':
-                                    msg = ``;
+                                    msg = `The best grill is in 'Konoba Karlen'. It's to your left before the roundabout when heading from Fažana to Pula.`;
                                     break;
                                 //drink
                                 case 'tea':
                                     msg = ``;
                                     break;
                                 case 'water':
-                                    msg = ``;
+                                    msg = `You can buy water at any store but I suggest you rather walk into any café or restaurant and ask for a glass of tap water because in Croatia we still have clean water :)`;
                                     break;
                                 case 'coffee':
-                                    msg = ``;
+                                    msg = `Coffe is sold in every locale in Fažana. 'Porto' is serving the best coffe in town.`;
                                     break;
                                 case 'drink':
-                                    msg = ``;
+                                    msg = `You can go out and drink at the local beach bars 'Shark' or 'Chupa Cabra'. They work long hours and you can also take a night swim while you're there :D`;
                                     break;
                                 case 'cocktail':
-                                    msg = ``;
+                                    msg = `Try visiting 'Beach Bar Coco'. It's to your right when you follow the coastline towards biVillage. There's a nice view at the top of the bunker it was made out of`;
                                     break;
                                 case 'beer':
                                     msg = ``;
                                     break;
                                 case 'wine':
-                                    msg = ``;
+                                    msg = `Oh just about any restaurant is fine. You haven't really been to Istria if you haven't tried Malvazija or Teran`;
                                     break;
                                 //accommodation
                                 case 'camp':
-                                    msg = ``;
+                                    msg = `You can find camp 'Pineta' if you drive north of Fažana (towards Vodnjan) and turn left at the sign that says 'Peroj'`;
                                     break;
                                 case 'accommodation':
-                                    msg = ``;
+                                    msg = `Try visiting or contacting our tourist office and asking them for help if you haven't found anything online already. They usually know who can book a place even when everyone's full.`;
                                     break;
                                 case 'hostel':
-                                    msg = ``;
+                                    msg = `In the old town there's a hostel that's a bit pricey called 'Chersin' but it's worth checking out if you're staying for one night.`;
                                     break;
                                 case 'hotel':
-                                    msg = ``;
+                                    msg = `We have a few hotels, 'Villetta Phasiana' is the most beautiful one in my opinion and it's just next to the parish Church of Saint Cosmas and Damian`;
                                     break;
-                                case 'appartment':
-                                    msg = ``;
+                                case 'apartment':
+                                    msg = `Apartments are usually booked so if there's no apartment on booking.com or airbnb.com I think you're out of luck :/`;
                                     break;
                                 //activity
                                 case 'jet ski':
-                                    msg = ``;
+                                case 'paddle boat':
+                                    msg = `They rent ${keywordEntity} at the seafront in biVillage.`;
                                     break;
                                 case 'diving':
-                                    msg = ``;
+                                    msg = `Just take a diving mask and walk into the water, you'll be surprised by how much you can sea hehe :D. As of any renting official scuba diving equipment, we unfortunately don't have that in Fažana`;
                                     break;
                                 case 'submarine':
-                                    msg = ``;
+                                    msg = `There's a red submarine that books rides in the center of Fažana`;
                                     break;
                                 case 'go out':
-                                    msg = ``;
+                                    msg = `You can go indulge in one of our many events in Fažana, visit beach bars and restaurants or take a ride to Pula and go clubbing from Thursday till Sunday.`;
                                     break;
                                 case 'boat ride':
-                                    msg = ``;
+                                    msg = `You can book a boat ride by talking to one of the bookers in Fažana (there are many along the seafront) or rent a boat near the parking with the big white cross.`;
                                     break;
                                 case 'watersports':
-                                    msg = ``;
-                                    break;
-                                case 'paddle boat':
-                                    msg = ``;
+                                    msg = `Unfortunately, there aren't any official places to play watersports. You'll have to improvise :)`;
                                     break;
                                 default:
-                                    msg = ``;
+                                    msg = `I'm sorry I can't give you directions to something that I don't know where it is`;
                                     break;
-                                break;
                             }
+                            break;
                         case 'is_there_x':
                             switch (keywordValue) {
                                 // food
@@ -156,6 +150,8 @@ const Chat = () => {
                                     msg = ``;
                                     break;
                                 case 'local cuisine':
+                                case 'pasta':
+                                case 'seafood':
                                     msg = ``;
                                     break;
                                 case 'fast food':
@@ -165,12 +161,6 @@ const Chat = () => {
                                     msg = ``;
                                     break;
                                 case 'grill':
-                                    msg = ``;
-                                    break;
-                                case 'pasta':
-                                    msg = ``;
-                                    break;
-                                case 'seafood':
                                     msg = ``;
                                     break;
                                 //drink
@@ -227,13 +217,16 @@ const Chat = () => {
                                 case 'boat ride':
                                     msg = ``;
                                     break;
-                                case 'watersports':
+                                case `Unfortunately, there aren't any official places to play watersports. You'll have to improvise :)`:
                                     msg = ``;
                                     break;
                                 case 'paddle boat':
                                     msg = ``;
                                     break;
-                                // event
+                                    // event
+                                case 'event':
+                                    msg = `Yes. We have many gastronomical events, cultural events and of course concerts.`;
+                                    break;
                                 case 'gastronomical event':
                                     msg = ``;
                                     break;
@@ -243,12 +236,11 @@ const Chat = () => {
                                 case 'cultural event':
                                     msg = ``;
                                     break;
-                                case 'event':
-                                    msg = ``;
-                                    break;
                                 default:
+                                    msg = `Not that I know of...`
                                 break;
                             }
+                            break;
                         default:
                                 msg = `I'm sorry, I can't make out what you needed from me. Try again please`
                     }
@@ -274,7 +266,6 @@ const Chat = () => {
                 <form id='chat-form' onSubmit={handleSubmit}>
                     <input type='text' value={input} placeholder='Ask me something :)' onChange={handleChange}/>
                     <button type='submit'>Send</button>
-                    {/* {runSample().then(res => res)} */}
                 </form>
             </div>
         </aside>
