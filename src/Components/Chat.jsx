@@ -121,7 +121,7 @@ const Chat = () => {
                                 //activity
                                 case 'jet ski':
                                 case 'paddle boat':
-                                    msg = `They rent ${keywordEntity} at the seafront in biVillage.`;
+                                    msg = `They rent ${keywordValue} at the seafront in biVillage.`;
                                     break;
                                 case 'diving':
                                     msg = `Just take a diving mask and walk into the water, you'll be surprised by how much you can sea hehe :D. As of any renting official scuba diving equipment, we unfortunately don't have that in Fažana`;
@@ -147,18 +147,18 @@ const Chat = () => {
                             switch (keywordValue) {
                                 // food
                                 case 'desert':
-                                    msg = ``;
+                                    msg = `Ah yes, there's plenty of yummy desert around here`;
                                     break;
                                 case 'local cuisine':
                                 case 'pasta':
                                 case 'seafood':
-                                    msg = ``;
+                                    msg = `Yes of course. There are many restaurants which serve ${keywordValue}`;
                                     break;
                                 case 'fast food':
-                                    msg = ``;
+                                    msg = `Yes, we even have fast food!`;
                                     break;
                                 case 'pizza':
-                                    msg = ``;
+                                    msg = `Of course we have the best pizza, even better than in Italy`;
                                     break;
                                 case 'grill':
                                     msg = ``;
