@@ -10,6 +10,29 @@ const selectRandomMessage = (array) => {
     return array[Math.floor(Math.random() * array.length)];
 }
 
+const happenings = [
+    {
+        text: 'Traditional evenings at Fažana’s waterfront',
+        date: '04.09.2019',
+        type: 'gastro',
+    },
+    {
+        text: 'Rhapsody in blue – event dedicated to the azure sea',
+        date: '30.08.2019',
+        type: 'cultural',
+    },
+    {
+        text: 'Fažana’s Twilights –classical music concert',
+        date: '19.08.2019',
+        type: 'concert',
+    },
+    {
+        text: 'Valbandon ispod čripnje (Valbandon under the baking lid) – competition in preparing dishes in a traditional Istrian way, under a baking lid čripnja, tasting Istrian wine and olive oil, Watermelon festival',
+        date: '17.08.2019',
+        type: 'gastro',
+    },
+]
+
 const Chat = () => {
     const [input, setInput] = useState('');
     const [messages, setMessages] = useState([
@@ -26,6 +49,7 @@ const Chat = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setMessages(previous => [...previous, {text: input, user: true}]);
+        document.querySelector('#chat').scroll(0, document.querySelector('#chat').scrollHeight);
         client.message(input, {})
             .then(res => {
                 let msg;
@@ -44,9 +68,9 @@ const Chat = () => {
                     const {value: keywordValue} = res.entities[keywordEntity][0];
                     const {value: intentValue} = res.entities.intent[0];
                     switch(intentValue) {
-                        case 'get_happening':
-                            msg = `Happening not implemented yet`;
-                            break;
+                        // case 'get_happening':
+                        //     msg = `Happening not implemented yet`;
+                        //     break;
                         case 'history_of_landmark':
                             switch(keywordValue) {
                                 case 'brijuni':
@@ -66,6 +90,7 @@ const Chat = () => {
                                 case 'desert':
                                     msg = `You can get desert at just about any restaurant or café`;
                                     break;
+                                case 'food':
                                 case 'local cuisine':
                                 case 'seafood':
                                 case 'pasta':
@@ -161,80 +186,71 @@ const Chat = () => {
                                     msg = `Of course we have the best pizza, even better than in Italy`;
                                     break;
                                 case 'grill':
-                                    msg = ``;
+                                    msg = `Yes there is.`;
                                     break;
                                 //drink
                                 case 'tea':
-                                    msg = ``;
+                                    msg = `Yes.`;
                                     break;
                                 case 'water':
-                                    msg = ``;
+                                    msg = `Yes, we even have drinkable tap water.`;
                                     break;
                                 case 'coffee':
-                                    msg = ``;
+                                    msg = `Of course`;
                                     break;
                                 case 'drink':
-                                    msg = ``;
+                                    msg = `Yes`;
                                     break;
                                 case 'cocktail':
-                                    msg = ``;
+                                    msg = `Yes, there's many beach bars which serve cocktails`;
                                     break;
                                 case 'beer':
-                                    msg = ``;
+                                    msg = `Yes we have plenty of beer :)`;
                                     break;
                                 case 'wine':
-                                    msg = ``;
+                                    msg = `Why wouldn't there be wine`;
                                     break;
                                 //accommodation
                                 case 'camp':
-                                    msg = ``;
+                                    msg = `We have 2 camps near Fažana`;
                                     break;
                                 case 'accommodation':
-                                    msg = ``;
+                                    msg = `Yes, we have hotels, hostels, camps and many appartments`;
                                     break;
                                 case 'hostel':
-                                    msg = ``;
+                                    msg = `Yes there are 2 hostels in Fažana`;
                                     break;
                                 case 'hotel':
-                                    msg = ``;
+                                    msg = `Yes there is a hotel`;
                                     break;
                                 case 'appartment':
-                                    msg = ``;
+                                    msg = `There are appartments but they're probably booked by now`;
                                     break;
                                 //activity
                                 case 'jet ski':
-                                    msg = ``;
+                                    msg = `Yes`;
                                     break;
                                 case 'diving':
-                                    msg = ``;
+                                    msg = `There is no official rental for scuba diving equipment unfortunately`;
                                     break;
                                 case 'submarine':
-                                    msg = ``;
-                                    break;
-                                case 'go out':
-                                    msg = ``;
+                                    msg = `There is a submarine tour in Fažana`;
                                     break;
                                 case 'boat ride':
-                                    msg = ``;
+                                    msg = `Yes there are many places to rent boats or boat rides`;
                                     break;
-                                case `Unfortunately, there aren't any official places to play watersports. You'll have to improvise :)`:
-                                    msg = ``;
+                                case `watersports`:
+                                    msg = `Unfortunately, there aren't any official places to play watersports. You'll have to improvise :)`;
                                     break;
                                 case 'paddle boat':
-                                    msg = ``;
+                                    msg = `Yes there are paddle boat rentals along Fažana's coast`;
                                     break;
                                     // event
                                 case 'event':
-                                    msg = `Yes. We have many gastronomical events, cultural events and of course concerts.`;
-                                    break;
                                 case 'gastronomical event':
-                                    msg = ``;
-                                    break;
                                 case 'concert':
-                                    msg = ``;
-                                    break;
                                 case 'cultural event':
-                                    msg = ``;
+                                    msg = `Yes. We have many gastronomical events, cultural events and of course concerts.`;
                                     break;
                                 default:
                                     msg = `Not that I know of...`
@@ -244,9 +260,11 @@ const Chat = () => {
                         default:
                                 msg = `I'm sorry, I can't make out what you needed from me. Try again please`
                     }
-                } else if (!('greetings' in res.entities) && 'intent' in res.entities && Object.entries(res.entities).length > 2) {
-                    // tu ide get happening potencijalno
-                } else {
+                } 
+                // else if (!('greetings' in res.entities) && 'get_happening' in res.entities.intent && Object.entries(res.entities).length > 2) {
+                    
+                // }
+                 else {
                     msg = `I'm sorry I didn't quite get you, could you paraphrase that for me?`
                 }
 
